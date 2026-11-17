@@ -318,6 +318,7 @@
      trainer — тренер на эту дату
      format  — "онлайн" или "очно"
      place   — площадка для очных (пока пусто)
+     time    — (необязательно) своё время для этой даты, если отличается от COURSES
      url     — ссылка на запись. У очных тренингов она сохранена,
                но на странице НЕ показывается: запись на них идёт через HRBP.
                Если порядок записи изменится, включить кнопку у очных можно
@@ -409,8 +410,8 @@ const EVENTS = [
   {date:"2026-10-21", title:"Управление временем", trainer:"Уварова Мария", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677879260772141076"},
   {date:"2026-10-28", title:"Введение в методологию Адизеса. Стили менеджмента", trainer:"Ершова Ольга", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677880820160717456"},
   {date:"2026-11-11", title:"Управление конфликтами: 7 типов по Адизесу", trainer:"Уварова Мария", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677883637638716979"},
-  {date:"2026-11-17", title:"Управление конфликтами: 7 типов по Адизесу", trainer:"Уварова Мария", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677889852063924088"},
   {date:"2026-11-25", title:"Анализ и структурирование информации с ИИ", trainer:"Ершова Ольга", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677890832239784424"},
+  {date:"2026-11-26", title:"Управление конфликтами: 7 типов по Адизесу", trainer:"Ершова Ольга", format:"онлайн", place:"", time:"11:00–15:00", url:"https://exam.alg-university.ru/_wt/corpu_event?id=7677889852063924088"},
   {date:"2026-12-03", title:"Искусство проведения 1:1", trainer:"Уварова Мария", format:"очно", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677892154947160808"},
   {date:"2026-12-09", title:"Анализ и структурирование информации с ИИ", trainer:"Ершова Ольга", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677892974869180493"},
   {date:"2026-12-16", title:"Анализ и структурирование информации с ИИ", trainer:"Ершова Ольга", format:"онлайн", place:"", url:"https://exam.askona.ru/_wt/corpu_event_cust?id=7677894940995271501"}
@@ -573,7 +574,7 @@ function openPop(iso, list){
     card.className = "ev";
     const online = e.format === "онлайн";
     const c = COURSES[e.title] || {};
-    const bits = [c.time, c.duration, e.place, e.trainer ? "Тренер: " + e.trainer : ""].filter(Boolean);
+    const bits = [e.time || c.time, c.duration, e.place, e.trainer ? "Тренер: " + e.trainer : ""].filter(Boolean);
 
     card.innerHTML =
       '<h4></h4>' +
